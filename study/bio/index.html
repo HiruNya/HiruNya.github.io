@@ -7,11 +7,15 @@
   </head>
   <body>
     <div class="main">
+      <div class="section">
       <h2>What is Bioinformatics?</h2>
-      <div class="quote">"Bioinformatics is an interdisciplinary field that develops methods and software tools for understanding biological data. As an interdisciplinary field of science, bioinformatics combines computer science, biology, mathematics, statistics and engineering to analyze and interpret biological data. Bioinformatics has been used for in silico analyses of biological queries using mathematical and statistical techniques. More broadly, bioinformatics is applied statistics and computing to biological science."<span style="float: right">- Wikipedia</span></div>
+      <div class="quote">"Bioinformatics is an interdisciplinary field that develops methods and software tools for understanding biological data. As an interdisciplinary field of science, bioinformatics combines computer science, biology, mathematics, statistics and engineering to analyze and interpret biological data. Bioinformatics has been used for in silico analyses of biological queries using mathematical and statistical techniques. More broadly, bioinformatics is applied statistics and computing to biological science."
+      <span style="float: right">- Wikipedia</span></div>
       <p>
         Bioinformatics build up databases that hold gene sequences, sequences of complete genomes, and amino acid sequences of proteins.
       </p>
+    </div>
+    <div class="section">
       <h2>Why are these databases needed?</h2>
       <p>
         Genome sequences, of a species, or amino acid sequences, of a protein, can be compared, by scientists, to the sequences found in these databases to find similarities and differences.
@@ -24,6 +28,78 @@
       <p>
         This information can also be used to fight parasites such as <i>Plasmodium</i> as the whole genome of these species are available in databases. Researchers can use this information to develop new methods of treatment and develop effective vaccines for malaria.
       </p>
+    </div>
+    <div class="section">
+      <h2>Databases:</h2>
+      <p>
+        <p>
+          Try searching one of them now:<br>
+          <input type="text" value="fibrin" id="db-query"/>
+          <select id="db-type">
+            <option>GenBank</option>
+            <option>UniProt</option>
+          </select>
+          <button id="db-search">Search</button></br>
+        </p>
+        <ul>
+          <li>
+            <a href="https://www.ncbi.nlm.nih.gov/genbank/" class="block_link">
+            <h3>GenBank</h3>
+            <p>
+              The National Institute of Health's (NIH) genetic sequence database.
+            </p>
+            <p>
+              This database exchanges data with the DNA DataBank of Japan and the Eurpoean Nucleotide Archive as it is part of the <a href="http://www.insdc.org/">International Nucleotide Sequence Database Collaboration (INSD)</a>
+            </p>
+            </a>
+          </li>
+          <li>
+            <a href="http://www.uniprot.org/" class="block_link">
+            <h3>UniProt</h3>
+            <p>
+              The <b>Uni</b>versal <b>Prot</b>ein Resource is a database that holds protein sequences and annotation data.
+            </p>
+            <p>
+              It is a collbation between the <a href="http://www.ebi.ac.uk">European Bioinformatics Institute</a>, the <a href="http://www.isb-sib.ch/">Swiss Institute of Bioinformatics</a> and the <a href="http://pir.georgetown.edu/">Protein Information Resource.</a>
+            </p>
+            </a>
+          </li>
+        </ul>
+      </p>
+    </div>
+    <div class="section">
+      <h2>Tools:</h2>
+      <ul>
+        <li>
+          <a href="https://blast.ncbi.nlm.nih.gov/" class="block_link">
+            <h3>BLAST</h3>
+            <p>
+              <div class="quote">
+                "The Basic Local Alignment Search Tool (BLAST) finds regions of local similarity between sequences. The program compares nucleotide or protein sequences to sequence databases and calculates the statistical significance of matches. BLAST can be used to infer functional and evolutionary relationships between sequences as well as help identify members of gene families."
+                <span style="float: right">- BLAST's NIH Website</span>
+              </div>
+              <p>This a commonly used tool to find simmilarites betwen the sample that they are studying and the samples in the database.</p>
+            </p>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
   </body>
+  <script type="text/javascript">
+    document.getElementById("db-search").addEventListener("click", ()=> {
+      let db_type = document.getElementById("db-type");
+      let q = document.getElementById("db-query").value;
+      let url;
+      switch (db_type.selectedIndex) {
+        case 0:
+          url = `https://www.ncbi.nlm.nih.gov/gene/?term=${q}`;
+          break;
+        case 1:
+          url = `http://www.uniprot.org/uniprot/?query=${q}&sort=score`;
+          break;
+      };
+      window.open(url);
+    })
+  </script>
 </html>
