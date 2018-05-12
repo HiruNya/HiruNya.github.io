@@ -38,3 +38,8 @@ li {
   text-decoration: none;
   color: inherit;
 }
+.link_list li {
+  list-style: circle;
+  margin-left: 20px;
+  border: none;
+}
