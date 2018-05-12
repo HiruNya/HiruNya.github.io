@@ -1,15 +1,20 @@
 body {
-  background-color: green;
+  background-color: #dfefe1;
   font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+p {
+  margin-right: 10px;
+  margin-left: 10px;
 }
 .main {
-    margin-left: 6%;
-    margin-right: 6%;
+    margin-left: 12%;
+    margin-right: 12%;
     padding-left: 1%;
     padding-right: 1%;
     padding-top: 5px;
     padding-bottom: 10px;
-    background-color: #FFFFFFDF;
+/*     background-color: #FFFFFFDF; */
     border-radius: 5px;
 }
 .section {
@@ -17,12 +22,16 @@ body {
 }
 h2 {
   font-family: 'Fira Sans', sans-serif;
+  text-align: center;
+  color: green;
 }
 .quote {
   font-style: italic;
   background-color: #0000001F;
   padding: 5px;
   font-family: "sans-serif";
+  margin-right: 20px;
+  margin-left: 20px;
 }
 ul {
   list-style-type: none;
@@ -30,6 +39,8 @@ ul {
 }
 li {
   border: solid;
+  border-width: 5px;
+  border-color: #a0041e;
   padding: 10px;
   margin-bottom: 15px;
 }
@@ -43,12 +54,27 @@ li {
   margin-left: 20px;
   border: none;
 }
+.search {
+  border: solid;
+  padding: 5px;
+  text-align: center;
+  border-color: #a0041e;
+}
+.search * {
+  font-size: 20px;
+  text-align: center;
+}
+button {
+  background-color: #a0041e;
+  color: white;
+  padding: 5px;
+}
 footer {
   margin-top: 5px;
   margin-bottom: 5px;
-  margin-right: 6.25%;
-  margin-left: 6.25%;
-  color: white;
+  margin-right: 12%;
+  margin-left: 12%;
+  color: green;
 }
 footer a {
   text-decoration: none;
