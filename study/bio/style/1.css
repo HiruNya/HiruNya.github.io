@@ -1,0 +1,22 @@
+body {
+  background-color: green;
+  font-family: "Roboto", sans-serif;
+}
+.main {
+    margin-left: 6%;
+    margin-right: 6%;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    background-color: #FFFFFFDF;
+    border-radius: 5px;
+}
+h2 {
+  font-family: 'Fira Sans', sans-serif;
+}
+.quote {
+  font-style: italic;
+  background-color: #0000001F;
+  padding: 5px;
+}
