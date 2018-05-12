@@ -44,9 +44,13 @@ li {
   border: none;
 }
 footer {
-  float: right;
   margin-top: 5px;
   margin-bottom: 5px;
   margin-right: 6.25%;
+  margin-left: 6.25%;
   color: white;
+}
+footer a {
+  text-decoration: none;
+  color: inherit;
 }
