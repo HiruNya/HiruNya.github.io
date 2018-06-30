@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["GameEvent","Represents an Event that the game uses."]],"struct":[["GameInput","The struct in charge of handling the input of the game."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["BackgroundImage","The background image that is shown behind all the characters in the game."]]});
