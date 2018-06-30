@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["translate","Translates a [`str`] into a [`Vec`] of `ScriptSteps`. Returns an error if it fails."]]});
+initSidebarItems({"fn":[["translate","Translates a [`str`] into a [`Vec`] of [`ScriptSteps`]. Returns an error if it fails."]]});

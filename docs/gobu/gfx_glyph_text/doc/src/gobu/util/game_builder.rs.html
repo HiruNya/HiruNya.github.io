@@ -169,7 +169,7 @@
 
 <span class="kw">type</span> <span class="ident">MaybeFile</span> <span class="op">=</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ExtFile</span><span class="op">&gt;</span>;
 
-<span class="doccomment">/// The struct that is used to build a ``Game`` struct.</span>
+<span class="doccomment">/// The struct that is used to build a [`Game`] struct.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GameBuilder</span> {
     <span class="doccomment">/// The size of the window.</span>
     <span class="doccomment">/// [w, h]</span>
@@ -188,7 +188,7 @@
     <span class="ident">input</span>: <span class="ident">MaybeFile</span>,
 }
 <span class="kw">impl</span> <span class="ident">GameBuilder</span> {
-    <span class="doccomment">/// Create a new ``GameBuilder`` struct by providing the size of the window.</span>
+    <span class="doccomment">/// Create a new [`GameBuilder`] struct by providing the size of the window.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">size</span>: [<span class="ident">f64</span>; <span class="number">2</span>]) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">GameBuilder</span> {
             <span class="ident">size</span>,
@@ -200,7 +200,7 @@
             <span class="ident">input</span>: <span class="prelude-val">None</span>,
         }
     }
-    <span class="doccomment">/// Builds the ``Game`` or returns an error.</span>
+    <span class="doccomment">/// Builds the [`Game`] or returns an error.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build</span>(<span class="self">self</span>, <span class="ident">factory</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GfxFactory</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Game</span>, <span class="ident">GameBuildError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident">Game</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">size</span>);
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">grid</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">grid</span> {
@@ -270,41 +270,41 @@
         }
         <span class="prelude-val">Ok</span>(<span class="ident">g</span>)
     }
-    <span class="doccomment">/// Create a GUI from either a path to an external file or a ``str``.</span>
+    <span class="doccomment">/// Create a GUI from either a path to an external file or a [`&amp;str`].</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gui</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ExtFile</span><span class="op">&gt;&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">gui</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">file</span>.<span class="ident">into</span>());
         <span class="self">self</span>
     }
-    <span class="doccomment">/// Create Characters from either a path to an external file or a ``str``.</span>
+    <span class="doccomment">/// Create Characters from either a path to an external file or a [`&amp;str`].</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">characters</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ExtFile</span><span class="op">&gt;&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">characters</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">file</span>.<span class="ident">into</span>());
         <span class="self">self</span>
     }
-    <span class="doccomment">/// Create Backgrounds from either a path to an external file or a ``str``.</span>
+    <span class="doccomment">/// Create Backgrounds from either a path to an external file or a [`&amp;str`].</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">backgrounds</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ExtFile</span><span class="op">&gt;&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">backgrounds</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">file</span>.<span class="ident">into</span>());
         <span class="self">self</span>
     }
-    <span class="doccomment">/// Create Inputs from either a path to an external file or a ``str``.</span>
+    <span class="doccomment">/// Create Inputs from either a path to an external file or a [`&amp;str`].</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">input</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ExtFile</span><span class="op">&gt;&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">input</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">file</span>.<span class="ident">into</span>());
         <span class="self">self</span>
     }
-    <span class="doccomment">/// Create a Grid from either a path to an external file or a ``str``.</span>
+    <span class="doccomment">/// Create a Grid from either a path to an external file or a [`&amp;str`].</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">grid</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">w</span>: <span class="ident">u32</span>, <span class="ident">h</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">grid</span> <span class="op">=</span> <span class="prelude-val">Some</span>([<span class="ident">w</span>, <span class="ident">h</span>]);
         <span class="self">self</span>
     }
-    <span class="doccomment">/// Load scripts from either a path to an external file or a ``str``.</span>
+    <span class="doccomment">/// Load scripts from either a path to an external file or a [`&amp;str`].</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scripts</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ExtFile</span><span class="op">&gt;&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">scripts</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">file</span>.<span class="ident">into</span>());
         <span class="self">self</span>
     }
 }
 
-<span class="doccomment">/// Represents an external file OR a ``str``.</span>
+<span class="doccomment">/// Represents an external file OR a [`String`].</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Note: when entering in a [&#39;String&#39;] to functions that take in an ``Into&lt;ExtFile&gt;``</span>
+<span class="doccomment">/// Note: when entering in a [`String`] or [`&amp;str`] to functions that take in an [`Into&lt;ExtFile&gt;`]</span>
 <span class="doccomment">/// it assumes that a Path was entered. If this was wrong and in fact a ``str`` was entered,</span>
 <span class="doccomment">/// you have to write out the whole enum variant. E.g. ``ExtFile::Str(&quot;TOML File goes here&quot;)``</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ExtFile</span> {

@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Padding","The padding of the textbox."]],"struct":[["TextBox","A struct that represents and draws a textbox"],["TextBoxBuilder","A builder struct that helps build a `TextBox`."]]});
+initSidebarItems({"enum":[["Padding","The padding of the textbox."]],"struct":[["TextBox","A struct that represents and draws a textbox"],["TextBoxBuilder","A builder struct that helps build a [`TextBox`]."]]});

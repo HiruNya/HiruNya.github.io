@@ -497,7 +497,7 @@
     }
     <span class="doccomment">/// Draws all the components of the game EXCEPT the text.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Use ``draw_text`` to set the text first.</span>
+    <span class="doccomment">/// Use [`draw_text`] to set the text first.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;gfx_glyph_text&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">draw</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">c</span>: <span class="ident">Context</span>, <span class="ident">g</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">G2d</span>) {
         <span class="ident">clear</span>(<span class="ident">color</span>::<span class="ident">BLACK</span>, <span class="ident">g</span>);
@@ -509,8 +509,8 @@
     }
     <span class="doccomment">/// Slightly misleading as it doesn&#39;t draw it just yet, it just queues all the glyphs ready to be drawn.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// To truly draw the text use the ``draw_2d_with_text`` function that is implemented on ``PistonWindow``</span>
-    <span class="doccomment">/// but remember to import the ``GfxGlyph`` trait first.</span>
+    <span class="doccomment">/// To truly draw the text use the [`draw_2d_with_text`] function that is implemented on [`PistonWindow`]</span>
+    <span class="doccomment">/// but remember to import the [`GfxGlyph`] trait first.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;gfx_glyph_text&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">draw_text</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">brush</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GlyphBrush</span><span class="op">&lt;</span><span class="ident">Resources</span>, <span class="ident">GfxFactory</span><span class="op">&gt;</span>) {
         <span class="self">self</span>.<span class="ident">ui</span>.<span class="ident">draw_text</span>(<span class="ident">brush</span>)
@@ -520,7 +520,7 @@
         self.background.resize(rect);
 //        self.ui.resize(rect);
     }*/</span>
-    <span class="doccomment">/// Add a ``Character`` to the HashMap of characters</span>
+    <span class="doccomment">/// Add a [`Character`] to the HashMap of characters</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_character</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="ident">String</span>, <span class="ident">character</span>: <span class="ident">Character</span>) {
         <span class="self">self</span>.<span class="ident">characters</span>.<span class="ident">insert</span>(<span class="ident">name</span>, <span class="ident">character</span>);
     }
@@ -529,7 +529,7 @@
         <span class="self">self</span>.<span class="ident">backgrounds</span>.<span class="ident">insert</span>(<span class="ident">name</span>, <span class="ident">background</span>);
     }
     <span class="doccomment">/// Add a character to the stage using the ``character`` argument as the key to the</span>
-    <span class="doccomment">/// characters HashMap and the ``name`` argument is the name of the ``CharacterEntity``</span>
+    <span class="doccomment">/// characters HashMap and the ``name`` argument is the name of the [`CharacterEntity`]</span>
     <span class="doccomment">/// That is spawned.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns True if the character is spawned to the stage.</span>
@@ -548,7 +548,7 @@
             <span class="self">self</span>.<span class="ident">background</span>.<span class="ident">set_texture</span>(<span class="ident">bg</span>.<span class="ident">clone</span>());
         }
     }
-    <span class="doccomment">/// Change the state of a ``CharacterEntity`` on the stage.</span>
+    <span class="doccomment">/// Change the state of a [`CharacterEntity`] on the stage.</span>
     <span class="doccomment">/// Returns True if the entity is changed.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">change_entity_state</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">String</span>, <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">String</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">entity</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">stage</span>.<span class="ident">get_mut</span>(<span class="ident">name</span>) {
@@ -560,7 +560,7 @@
             } <span class="kw">else</span> {<span class="bool-val">false</span>}
         } <span class="kw">else</span> {<span class="bool-val">false</span>}
     }
-    <span class="doccomment">/// Move a ``CharacterEntity``&#39;s position on the screen.</span>
+    <span class="doccomment">/// Move a [`CharacterEntity`]&#39;s position on the screen.</span>
     <span class="doccomment">/// (The position is relative to the grid you&#39;ve specified).</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">move_character</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">String</span>, <span class="ident">pos</span>: <span class="ident">Pos</span>) {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">entity</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">stage</span>.<span class="ident">get_mut</span>(<span class="ident">name</span>) {
@@ -583,7 +583,7 @@
         <span class="self">self</span>.<span class="ident">ui</span>.<span class="ident">speaker_box</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">speaker_box</span>);
     }
     <span class="doccomment">/// Enables playing music in the game and returns a mutable reference in a result</span>
-    <span class="doccomment">/// to the newly created ``Music`` struct that can be used to play music.</span>
+    <span class="doccomment">/// to the newly created [`Music`] struct that can be used to play music.</span>
     <span class="doccomment">/// ```rust, no_run</span>
     <span class="doccomment">///    if let Ok(music) = game.enable_music() {</span>
     <span class="doccomment">///        music.add_music_from_file(&quot;gabriel&quot;, &quot;C:\\Users\\Hiruna\\Music\\Songs\\01. ガヴリールドロップキック.flac&quot;)</span>
@@ -605,7 +605,7 @@
         <span class="kw">let</span> <span class="ident">map</span> <span class="op">=</span> <span class="ident">load_characters_from_file</span>(<span class="ident">path</span>, <span class="ident">factory</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">load_characters</span>(<span class="ident">map</span>))
     }
-    <span class="doccomment">/// Load characters from a ``&amp;str``.</span>
+    <span class="doccomment">/// Load characters from a [`&amp;str`].</span>
     <span class="doccomment">/// Use this if you intend on compiling the TOML file and not keep it externally.</span>
     <span class="doccomment">/// Also could be used to load characters after decrypting a file.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load_characters_from_str</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">factory</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GfxFactory</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ConfigImportError</span><span class="op">&gt;</span> {
@@ -624,7 +624,7 @@
         <span class="self">self</span>.<span class="ident">input</span>.<span class="ident">add_input</span>(<span class="ident">input</span>);
         <span class="prelude-val">Ok</span>(())
     }
-    <span class="doccomment">/// Load input from a ``&amp;str``.</span>
+    <span class="doccomment">/// Load input from a [`&amp;str`].</span>
     <span class="doccomment">/// Use this if you intend on compiling the TOML file and not keep it externally.</span>
     <span class="doccomment">/// Also could be used to load characters after decrypting a file.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load_input_from_str</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>)
@@ -640,7 +640,7 @@
         <span class="self">self</span>.<span class="ident">load_gui</span>(<span class="ident">gui</span>);
         <span class="prelude-val">Ok</span>(())
     }
-    <span class="doccomment">/// Load the GUI from a ``&amp;str``.</span>
+    <span class="doccomment">/// Load the GUI from a [`&amp;str`].</span>
     <span class="doccomment">/// Use this if you intend on compiling the TOML file and not keep it externally.</span>
     <span class="doccomment">/// Also could be used to load characters after decrypting a file.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load_gui_from_str</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>)
@@ -663,7 +663,7 @@
         <span class="kw">let</span> <span class="ident">bgs</span> <span class="op">=</span> <span class="ident">load_backgrounds_from_file</span>(<span class="ident">path</span>, <span class="ident">factory</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">load_backgrounds</span>(<span class="ident">bgs</span>))
     }
-    <span class="doccomment">/// Load the backgrounds from a ``&amp;str``.</span>
+    <span class="doccomment">/// Load the backgrounds from a [`&amp;str`].</span>
     <span class="doccomment">/// Use this if you intend on compiling the TOML file and not keep it externally.</span>
     <span class="doccomment">/// Also could be used to load characters after decrypting a file.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load_backgrounds_from_str</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">factory</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GfxFactory</span>)
@@ -680,7 +680,7 @@
         <span class="kw">let</span> <span class="ident">scripts</span> <span class="op">=</span> <span class="ident">load_scripts_from_file</span>(<span class="ident">path</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">load_scripts</span>(<span class="ident">scripts</span>))
     }
-    <span class="doccomment">/// Load scripts from a ``&amp;str``.</span>
+    <span class="doccomment">/// Load scripts from a [`&amp;str`].</span>
     <span class="doccomment">/// Use this if you intend on compiling the TOML file and not keep it externally.</span>
     <span class="doccomment">/// Also could be used to load characters after decrypting a file.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load_scripts_from_str</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>)

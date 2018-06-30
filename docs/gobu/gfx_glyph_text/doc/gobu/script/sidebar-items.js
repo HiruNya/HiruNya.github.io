@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["ScriptStep","Represents an action dictated by the script"]],"mod":[["parser","Parses script files and turns them into `ScriptStep`s"]],"struct":[["Script","The struct in charge of the story in the VN and also in charge of parsing everything."]]});
+initSidebarItems({"enum":[["ScriptStep","Represents an action dictated by the script"]],"mod":[["parser","Parses script files and turns them into [`ScriptStep`]s"]],"struct":[["Script","The struct in charge of the story in the VN and also in charge of parsing everything."]]});

@@ -95,7 +95,7 @@
     <span class="doccomment">/// Sets the texture of the background.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// It is recommended to use the backgrounds HashMap and the function provided by</span>
-    <span class="doccomment">/// the ``Game`` struct instead.</span>
+    <span class="doccomment">/// the [`Game`] struct instead.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_texture</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">texture</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">G2dTexture</span><span class="op">&gt;</span>) {
         <span class="self">self</span>.<span class="ident">texture</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">texture</span>);
     }
