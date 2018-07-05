@@ -160,6 +160,29 @@
 <span id="160">160</span>
 <span id="161">161</span>
 <span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="kw">super</span>::<span class="kw">super</span>::{
     <span class="ident">game</span>::<span class="ident">Game</span>,
@@ -186,6 +209,8 @@
     <span class="ident">grid</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>[<span class="ident">u32</span>; <span class="number">2</span>]<span class="op">&gt;</span>,
     <span class="doccomment">/// The path or string to an Input config file.</span>
     <span class="ident">input</span>: <span class="ident">MaybeFile</span>,
+    <span class="doccomment">/// The path or string to a Music config file.</span>
+    <span class="ident">music</span>: <span class="ident">MaybeFile</span>,
 }
 <span class="kw">impl</span> <span class="ident">GameBuilder</span> {
     <span class="doccomment">/// Create a new [`GameBuilder`] struct by providing the size of the window.</span>
@@ -198,6 +223,7 @@
             <span class="ident">scripts</span>: <span class="prelude-val">None</span>,
             <span class="ident">grid</span>: <span class="prelude-val">None</span>,
             <span class="ident">input</span>: <span class="prelude-val">None</span>,
+            <span class="ident">music</span>: <span class="prelude-val">None</span>,
         }
     }
     <span class="doccomment">/// Builds the [`Game`] or returns an error.</span>
@@ -268,6 +294,21 @@
                 },
             }
         }
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">music</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="ident">g</span>.<span class="ident">enable_music</span>() {
+                <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">e</span> {
+                    <span class="ident">ExtFile</span>::<span class="ident">Path</span>(<span class="ident">p</span>) <span class="op">=&gt;</span> {
+                        <span class="ident">m</span>.<span class="ident">load_from_config_file</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>)
+                    },
+                    <span class="ident">ExtFile</span>::<span class="ident">Str</span>(<span class="ident">s</span>) <span class="op">=&gt;</span> {
+                        <span class="ident">m</span>.<span class="ident">load_from_config_str</span>(<span class="kw-2">&amp;</span><span class="ident">s</span>)
+                    },
+                };
+                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">er</span>) <span class="op">=</span> <span class="ident">result</span> {
+                    <span class="kw">return</span> <span class="prelude-val">Err</span>( <span class="ident">GameBuildError</span>::<span class="ident">Music</span>(<span class="ident">er</span>) )
+                }
+            }
+        }
         <span class="prelude-val">Ok</span>(<span class="ident">g</span>)
     }
     <span class="doccomment">/// Create a GUI from either a path to an external file or a [`&amp;str`].</span>
@@ -298,6 +339,11 @@
     <span class="doccomment">/// Load scripts from either a path to an external file or a [`&amp;str`].</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scripts</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ExtFile</span><span class="op">&gt;&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">scripts</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">file</span>.<span class="ident">into</span>());
+        <span class="self">self</span>
+    }
+    <span class="doccomment">/// Load music from either a path to an external file or a [`&amp;str`].</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">music</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ExtFile</span><span class="op">&gt;&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">music</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">file</span>.<span class="ident">into</span>());
         <span class="self">self</span>
     }
 }

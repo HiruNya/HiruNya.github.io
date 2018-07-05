@@ -207,7 +207,7 @@
             <span class="ident">default</span>: <span class="ident">default</span>.<span class="ident">unwrap_or</span>(<span class="string">&quot;&quot;</span>.<span class="ident">to_string</span>()),
             <span class="ident">state_map</span>: <span class="ident">character_map</span>,
             <span class="ident">size</span>: <span class="ident">size</span>.<span class="ident">unwrap_or</span>([<span class="number">0.</span>, <span class="number">0.</span>]),
-            <span class="ident">offset</span>: <span class="ident">offset</span>.<span class="ident">unwrap_or</span>(<span class="ident">Pos</span> {<span class="ident">x</span>: <span class="number">0.</span>, <span class="ident">y</span>: <span class="number">0.</span>}),
+            <span class="ident">offset</span>: <span class="ident">offset</span>.<span class="ident">unwrap_or</span>(<span class="ident">Pos</span>::<span class="ident">new</span>(<span class="number">0.</span>, <span class="number">0.</span>)),
         };
         <span class="ident">new_map</span>.<span class="ident">insert</span>(<span class="ident">k</span>.<span class="ident">clone</span>(), <span class="ident">character</span>);
     }

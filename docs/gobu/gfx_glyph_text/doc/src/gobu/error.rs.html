@@ -124,6 +124,8 @@
 <span id="124">124</span>
 <span id="125">125</span>
 <span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! A collection of all the errors used in this crate.</span>
 <span class="doccomment">//!</span>
@@ -224,6 +226,8 @@
     <span class="ident">Story</span>(<span class="ident">ScriptConfigImportError</span>),
     <span class="doccomment">/// Error importing the Input file.</span>
     <span class="ident">Input</span>(<span class="ident">ConfigImportError</span>),
+    <span class="doccomment">/// Error importing the Music file.</span>
+    <span class="ident">Music</span>(<span class="ident">ConfigImportError</span>),
 }
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">ScriptConfigImportError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GameBuildError</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">ScriptConfigImportError</span>) <span class="op">-&gt;</span> <span class="ident">GameBuildError</span> {
@@ -235,7 +239,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">MusicError</span> {
     <span class="doccomment">/// No default output device for playing music was found.</span>
-    <span class="ident">NoDefaultOutputSourceFound</span>,
+    <span class="ident">NoDefaultOutputDeviceFound</span>,
     <span class="doccomment">/// Error in decoding the music file.</span>
     <span class="ident">Decoder</span>(<span class="ident">DecoderError</span>),
     <span class="doccomment">/// Error finding and opening the file.</span>

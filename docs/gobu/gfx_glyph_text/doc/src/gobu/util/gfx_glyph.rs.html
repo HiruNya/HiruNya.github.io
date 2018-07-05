@@ -64,6 +64,8 @@
 <span id="64">64</span>
 <span id="65">65</span>
 <span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! A trait that implements the draw_2d_with_text function onto PistonWindow.</span>
 <span class="doccomment">//!</span>
@@ -96,6 +98,8 @@
 
 <span class="doccomment">/// A trait that implements drawing text with gfx_glyph onto PistonWindow</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">GfxGlyph</span> {
+    <span class="doccomment">/// Similar to the draw_2d function of PistonWindow however it will draw the text</span>
+    <span class="doccomment">/// from gfx_glyph after everything in the closure has been drawn.</span>
     <span class="kw">fn</span> <span class="ident">draw_2d_with_text</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="ident">F</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">e</span>: <span class="kw-2">&amp;</span><span class="ident">E</span>, <span class="ident">brush</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GlyphBrush</span><span class="op">&lt;</span><span class="ident">Resources</span>, <span class="ident">GfxFactory</span><span class="op">&gt;</span>, <span class="ident">f</span>: <span class="ident">F</span>)
         <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>, <span class="ident">String</span><span class="op">&gt;</span> <span class="kw">where</span>
         <span class="ident">E</span>: <span class="ident">GenericEvent</span>,
