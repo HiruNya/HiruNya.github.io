@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["FadeIn","Fades the character in from being fully transparent to being fully opaque."],["FadeOut","Fades the character in from being fully transparent to being fully opaque."]]});

@@ -126,6 +126,8 @@
 <span id="126">126</span>
 <span id="127">127</span>
 <span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! A collection of all the errors used in this crate.</span>
 <span class="doccomment">//!</span>
@@ -228,6 +230,8 @@
     <span class="ident">Input</span>(<span class="ident">ConfigImportError</span>),
     <span class="doccomment">/// Error importing the Music file.</span>
     <span class="ident">Music</span>(<span class="ident">ConfigImportError</span>),
+    <span class="doccomment">/// Error importing the Transition file.</span>
+    <span class="ident">Transition</span>(<span class="ident">ConfigImportError</span>),
 }
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">ScriptConfigImportError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GameBuildError</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">ScriptConfigImportError</span>) <span class="op">-&gt;</span> <span class="ident">GameBuildError</span> {

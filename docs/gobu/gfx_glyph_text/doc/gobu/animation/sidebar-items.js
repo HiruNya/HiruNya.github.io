@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["TransResult","The result of a transition."]],"mod":[["premade","Prebuilt transitions that can be used without having to make a custom one."]],"struct":[["Animation","The struct that is in charge of holding all the animations in the game."]],"trait":[["CharacterTransition","A trait for Character Transitions like FadeIn"]]});

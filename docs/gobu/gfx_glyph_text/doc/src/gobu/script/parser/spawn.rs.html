@@ -59,6 +59,18 @@
 <span id="59">59</span>
 <span id="60">60</span>
 <span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">nom</span>::<span class="ident">types</span>::<span class="ident">CompleteStr</span>;
 <span class="kw">use</span> <span class="kw">super</span>::{
@@ -91,12 +103,20 @@
                         ),
                         <span class="op">|</span><span class="ident">name</span><span class="op">|</span> <span class="ident">Args</span>::<span class="ident">Name</span>(<span class="ident">name</span>.<span class="ident">to_string</span>())
                     )
+                    <span class="op">|</span> <span class="macro">map</span><span class="macro">!</span>(
+                        <span class="macro">preceded</span><span class="macro">!</span>(
+                            <span class="macro">tag</span><span class="macro">!</span>(<span class="string">&quot;with&quot;</span>),
+                            <span class="ident">quote</span>
+                        ),
+                        <span class="op">|</span><span class="ident">trans</span><span class="op">|</span> <span class="ident">Args</span>::<span class="ident">Trans</span>(<span class="ident">trans</span>.<span class="ident">to_string</span>())
+                    )
                 )
             )
         ),
         <span class="op">|</span>(<span class="ident">character</span>, <span class="ident">list</span>)<span class="op">|</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">name</span> <span class="op">=</span> <span class="prelude-val">None</span>;
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">trans</span> <span class="op">=</span> <span class="prelude-val">None</span>;
             <span class="kw">for</span> <span class="ident">item</span> <span class="kw">in</span> <span class="ident">list</span> {
                 <span class="kw">match</span> <span class="ident">item</span> {
                     <span class="ident">Args</span>::<span class="ident">Name</span>(<span class="ident">n</span>) <span class="op">=&gt;</span> {
@@ -104,10 +124,13 @@
                     },
                     <span class="ident">Args</span>::<span class="ident">Pos</span>(<span class="ident">x</span>, <span class="ident">y</span>) <span class="op">=&gt;</span> {
                         <span class="ident">pos</span> <span class="op">=</span> <span class="prelude-val">Some</span>((<span class="ident">x</span>, <span class="ident">y</span>))
-                    }
+                    },
+                    <span class="ident">Args</span>::<span class="ident">Trans</span>(<span class="ident">t</span>) <span class="op">=&gt;</span> {
+                        <span class="ident">trans</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">t</span>.<span class="ident">to_string</span>())
+                    },
                 }
             }
-            <span class="ident">ScriptStep</span>::<span class="ident">Spawn</span>(<span class="ident">character</span>.<span class="ident">to_string</span>(), <span class="ident">name</span>, <span class="ident">pos</span>)
+            <span class="ident">ScriptStep</span>::<span class="ident">Spawn</span>(<span class="ident">character</span>.<span class="ident">to_string</span>(), <span class="ident">name</span>, <span class="ident">pos</span>, <span class="ident">trans</span>)
         }
     )
 );
@@ -115,6 +138,7 @@
 <span class="kw">enum</span> <span class="ident">Args</span> {
     <span class="ident">Name</span>(<span class="ident">String</span>),
     <span class="ident">Pos</span>(<span class="ident">f64</span>, <span class="ident">f64</span>),
+    <span class="ident">Trans</span>(<span class="ident">String</span>)
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span>
