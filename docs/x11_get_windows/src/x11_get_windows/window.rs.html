@@ -105,7 +105,6 @@
 <span id="105">105</span>
 <span id="106">106</span>
 <span id="107">107</span>
-<span id="108">108</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">x11</span>::<span class="ident">xlib</span>::{
     <span class="ident">Window</span> <span class="kw">as</span> <span class="ident">XWindow</span>,
@@ -117,7 +116,6 @@
 };
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">ffi</span>::<span class="ident">CStr</span>,
-    <span class="ident">mem</span>::<span class="ident">uninitialized</span>,
     <span class="ident">ops</span>::<span class="ident">Drop</span>,
     <span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
     <span class="ident">ptr</span>::<span class="ident">null_mut</span>,
@@ -155,7 +153,7 @@
         <span class="kw">let</span> <span class="ident">Session</span> { <span class="ident">display</span>, <span class="ident">root_window</span>, <span class="ident">active_window_atom</span>, .. } <span class="op">=</span> <span class="ident">session</span>;
         <span class="kw">let</span> <span class="ident">root_window</span> <span class="op">=</span> <span class="ident">root_window</span>.<span class="ident">get_or_insert_with</span>(<span class="op">||</span> <span class="ident">Window</span>::<span class="ident">default_root_window</span>(<span class="ident">display</span>));
         <span class="kw">let</span> <span class="ident">active_window_atom</span> <span class="op">=</span> <span class="ident">active_window_atom</span>.<span class="ident">get_or_insert_with</span>(<span class="op">||</span> <span class="ident">Atom</span>::<span class="ident">new</span>(<span class="ident">display</span>, <span class="ident">NET_ACTIVE_WINDOW</span>).<span class="ident">unwrap</span>());
-        <span class="kw">let</span> <span class="ident">response</span> <span class="op">=</span> <span class="kw">unsafe</span>{<span class="ident">get_window_property</span>(<span class="ident">display</span>, <span class="ident">root_window</span>, <span class="kw-2">*</span><span class="ident">active_window_atom</span>, <span class="ident">XA_WINDOW</span>)<span class="question-mark">?</span>};
+        <span class="kw">let</span> <span class="ident">response</span> <span class="op">=</span> <span class="kw">unsafe</span>{<span class="ident">get_window_property</span>(<span class="ident">display</span>, <span class="kw-2">*</span><span class="ident">root_window</span>, <span class="kw-2">*</span><span class="ident">active_window_atom</span>, <span class="ident">XA_WINDOW</span>)<span class="question-mark">?</span>};
         <span class="kw">let</span> <span class="ident">window</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">response</span>.<span class="ident">actual_format_return</span> {
             <span class="number">8</span> <span class="op">=&gt;</span> {
                 <span class="kw">unsafe</span>{<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">response</span>.<span class="ident">proper_return</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="ident">response</span>.<span class="ident">nitems_return</span> <span class="kw">as</span> <span class="ident">usize</span>)}
@@ -182,12 +180,12 @@
     <span class="doccomment">/// If the window does not have a title, a null pointer may be returned.</span>
     <span class="doccomment">/// In that case the [Null] error is returned.</span>
     <span class="doccomment">/// However, I have not encountered a [Null] error yet.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_title</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">display</span>: <span class="kw-2">&amp;</span><span class="ident">Display</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">WindowTitle</span>, <span class="ident">Null</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_title</span>(<span class="self">self</span>, <span class="ident">display</span>: <span class="kw-2">&amp;</span><span class="ident">Display</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">WindowTitle</span>, <span class="ident">Null</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">text_property</span> <span class="op">=</span> <span class="ident">XTextProperty</span> {
             <span class="ident">value</span>: <span class="ident">null_mut</span>(),
-            <span class="ident">encoding</span>: <span class="kw">unsafe</span> { <span class="ident">uninitialized</span>() },
-            <span class="ident">format</span>: <span class="kw">unsafe</span> { <span class="ident">uninitialized</span>() },
-            <span class="ident">nitems</span>: <span class="kw">unsafe</span> { <span class="ident">uninitialized</span>() },
+            <span class="ident">encoding</span>: <span class="number">0</span>,
+            <span class="ident">format</span>: <span class="number">0</span>,
+            <span class="ident">nitems</span>: <span class="number">0</span>,
         };
         <span class="kw">unsafe</span> { 
             <span class="ident">XGetWMName</span>(

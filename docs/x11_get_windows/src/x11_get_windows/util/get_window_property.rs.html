@@ -98,7 +98,6 @@
     <span class="ident">XGetWindowProperty</span>,
 };
 <span class="kw">use</span> <span class="ident">std</span>::{
-    <span class="ident">mem</span>::<span class="ident">uninitialized</span>,
     <span class="ident">os</span>::<span class="ident">raw</span>::{
         <span class="ident">c_int</span>,
         <span class="ident">c_uchar</span>,
@@ -119,15 +118,11 @@
 <span class="doccomment">/// An example of how to handle the response can be found in the [GetWindowPropertyResponse] docs.</span>
 <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_window_property</span>(
     <span class="ident">display</span>: <span class="kw-2">&amp;</span><span class="ident">Display</span>,
-    <span class="ident">window</span>: <span class="kw-2">&amp;</span><span class="ident">Window</span>,
+    <span class="ident">window</span>: <span class="ident">Window</span>,
     <span class="ident">property</span>: <span class="ident">Atom</span>,
     <span class="ident">expected_type</span>: <span class="ident">XAtom</span>
 ) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">GetWindowPropertyResponse</span>, <span class="ident">NotSupported</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">actual_type_return</span>: <span class="ident">XAtom</span> <span class="op">=</span> <span class="ident">uninitialized</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">actual_format_return</span>: <span class="ident">c_int</span> <span class="op">=</span> <span class="ident">uninitialized</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">nitems_return</span>: <span class="ident">c_ulong</span> <span class="op">=</span> <span class="ident">uninitialized</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes_after_return</span>: <span class="ident">c_ulong</span> <span class="op">=</span> <span class="ident">uninitialized</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">proper_return</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_uchar</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">response</span> <span class="op">=</span> <span class="ident">GetWindowPropertyResponse</span>::<span class="ident">default</span>();
 
     <span class="kw">if</span> <span class="ident">XGetWindowProperty</span>(
         <span class="ident">display</span>.<span class="number">0</span>,
@@ -136,19 +131,13 @@
         <span class="number">0</span>, <span class="number">4096</span> <span class="op">/</span> <span class="number">4</span>,
         <span class="ident">XFalse</span>,
         <span class="ident">expected_type</span>,
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">actual_type_return</span>,
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">actual_format_return</span>,
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">nitems_return</span>,
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">bytes_after_return</span>,
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">proper_return</span>
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">response</span>.<span class="ident">actual_type_return</span>,
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">response</span>.<span class="ident">actual_format_return</span>,
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">response</span>.<span class="ident">nitems_return</span>,
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">response</span>.<span class="ident">bytes_after_return</span>,
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">response</span>.<span class="ident">proper_return</span>
     ) <span class="op">==</span> <span class="number">0</span> {
-        <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">GetWindowPropertyResponse</span>{
-            <span class="ident">actual_type_return</span>,
-            <span class="ident">actual_format_return</span>,
-            <span class="ident">nitems_return</span>,
-            <span class="ident">bytes_after_return</span>,
-            <span class="ident">proper_return</span>,
-        })
+        <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">response</span>)
     }
     <span class="prelude-val">Err</span>(<span class="ident">NotSupported</span>)
 }
@@ -160,7 +149,7 @@
 <span class="doccomment">/// **NOTE:** Remember to use XFree on the pointer.</span>
 <span class="doccomment">/// </span>
 <span class="doccomment">/// # Example:</span>
-<span class="doccomment">/// ```</span>
+<span class="doccomment">/// ```ignore</span>
 <span class="doccomment">/// let response: GetWindowPropertyResponse = get_window_property(...);</span>
 <span class="doccomment">/// if response.actual_format_return == 8 {</span>
 <span class="doccomment">///     slice::from_raw_parts(response.proper_return as *const u8, response.nitems_return as usize)</span>
@@ -183,7 +172,18 @@
     <span class="doccomment">/// This crate ignores this field.</span>
     <span class="kw">pub</span> <span class="ident">bytes_after_return</span>: <span class="ident">c_ulong</span>,
     <span class="doccomment">/// The pointer that is returned.</span>
-    <span class="kw">pub</span> <span class="ident">proper_return</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_uchar</span>,
+    <span class="kw">pub</span> <span class="ident">proper_return</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_uchar</span>,
+}
+<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">GetWindowPropertyResponse</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">Self</span> {
+            <span class="ident">actual_type_return</span>: <span class="number">0</span>,
+            <span class="ident">actual_format_return</span>: <span class="number">0</span>,
+            <span class="ident">nitems_return</span>: <span class="number">0</span>,
+            <span class="ident">bytes_after_return</span>: <span class="number">0</span>,
+            <span class="ident">proper_return</span>: <span class="ident">null_mut</span>(),
+        }
+    }
 }
 </pre>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../../";window.currentCrate = "x11_get_windows";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script defer src="../../../search-index.js"></script></body></html>
