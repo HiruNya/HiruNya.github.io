@@ -106,14 +106,15 @@
 <span id="106">106</span>
 <span id="107">107</span>
 <span id="108">108</span>
+<span id="109">109</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! x11_get_windows is a Rust crate that makes it easier to query the x11 windowing sytsem</span>
 <span class="doccomment">//! to get the names of windows running on the computer.</span>
 <span class="doccomment">//! </span>
 <span class="doccomment">//! [Link to online docs.](https://hirunya.github.io/docs/x11_get_windows/x11_get_windows/)</span>
 <span class="doccomment">//! </span>
-<span class="doccomment">//! This is done by querying the _NET_CLIENT_LIST property for the list of windows</span>
-<span class="doccomment">//! and _NET_ACTIVE_WINDOW for the current active window.</span>
+<span class="doccomment">//! This is done by querying the `_NET_CLIENT_LIST` property for the list of windows</span>
+<span class="doccomment">//! and `_NET_ACTIVE_WINDOW` for the current active window.</span>
 <span class="doccomment">//! This seems to be a part of what is known as the</span>
 <span class="doccomment">//! [&quot;Extended Window Manager Hints&quot;/&quot;NetWM&quot; standard.](https://en.wikipedia.org/wiki/Extended_Window_Manager_Hints)</span>
 <span class="doccomment">//! However your Desktop Environment may not follow this convention and therefore</span>
@@ -163,6 +164,7 @@
 <span class="doccomment">//! please use the same one for each time as [x11::xlib::XOpenDisplay] is used when opening,</span>
 <span class="doccomment">//! and [x11::xlib::XCloseDisplay] is used on drop.</span>
 <span class="doccomment">//! </span>
+<span class="doccomment">//! # Links:</span>
 <span class="doccomment">//! Here are some possibly helpful links that I used when making this crate and might be helpful if you want to go past the small functionality of this crate:</span>
 <span class="doccomment">//! * [Xlib - C Language X Interface](https://www.x.org/releases/X11R7.7/doc/libX11/libX11/libX11.html#Obtaining_and_Changing_Window_Properties)</span>
 <span class="doccomment">//! * [StackOverflow X11: List top level windows](https://stackoverflow.com/questions/37359063/x11-list-top-level-windows)</span>
